@@ -1,14 +1,36 @@
 <head>
-  <title>blogging-app</title>
+  <title>Meteor Blogging Application</title>
 </head>
-
+ 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <div class='container'>
+    <header>
+      <h1>Meteor Blogging Application</h1>
 
-  {{> hello}}
+      {{> loginButtons}}
+			
+			{{#if currentUser}}
+	      <h3>Create A New Post</h3>
+	      <form class='new-post'>
+	      	<input type='text' name='title' placeholder='Enter Title' />
+	      	<input type='text' name='description' placeholder='Enter Description' />
+	      	<button type="submit">Create</button>
+	      </form>
+	    {{/if}}
+    </header>
+ 
+    <ul>
+      {{#each posts}}
+        {{> post}}
+      {{/each}}
+    </ul>
+  </div>
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+ 
+<template name='post'>
+  <li>
+			<h3>{{title}}</h3>
+	  	<h5>{{createdAt}}</h5>
+			<p class='description'>{{description}}</p>
+  </li>
 </template>
