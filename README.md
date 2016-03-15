@@ -1,1 +1,1 @@
-MeteorJS blogging application
+MeteorJS blogging application quick-run
