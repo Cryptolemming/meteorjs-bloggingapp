@@ -1,1 +1,8 @@
 /* CSS declarations go here */
+ul {
+  list-style-type: none;
+}
+
+.description {
+  margin-left: 20px;
+}

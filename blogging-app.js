@@ -32,6 +32,43 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.post.helpers({
+    editing: function() {
+      return Session.equals('editPostId', this._id);
+    }
+  });
+
+  Template.post.events({
+    'click .edit': function () {
+      Session.set('editPostId', this._id);
+    },
+    'click .delete': function () {
+      Meteor.call('deletePost', this._id);
+    },
+    'click .cancel': function() {
+      Session.set('editPostId', null);
+    },
+    'submit .edit-post': function(e) {
+
+      console.log('editing');
+      e.preventDefault();
+
+      var title = e.target.editTitle.value;
+      var description = e.target.editDescription.value;
+
+      var updatedPost = {
+        title: title,
+        description: description,
+      }
+
+      Meteor.call('editPost', updatedPost, this._id)
+
+      e.target.editTitle.value = '';
+      e.target.editDescription.value = '';
+      Session.set('editPostId', null);
+    }
+  });
+
   Accounts.ui.config({
     passwordSignupFields: 'USERNAME_ONLY'
   });
@@ -39,11 +76,6 @@ if (Meteor.isClient) {
 
 Meteor.methods({
   addPost: function (newPost) {
-    // Make sure the user is logged in before inserting a task
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('not-authorized');
-    }
- 
     Posts.insert({
       title: newPost.title,
       description: newPost.description,
@@ -51,5 +83,22 @@ Meteor.methods({
       owner: Meteor.userId(),
       username: Meteor.user().username
     });
-  }
+  },
+  editPost: function(updatedPost, postId) {
+    var post = Posts.findOne(postId);
+    if (post.username !== Meteor.user().username) {
+      alert('You do not have permission to edit that post');
+      throw new Meteor.Error('not-authorized');
+    }
+    Posts.update(postId, {$set: updatedPost});
+
+  },
+  deletePost: function (postId) {
+    var post = Posts.findOne(postId);
+    if (post.username !== Meteor.user().username) {
+      alert('You do not have permission to delete that post');
+      throw new Meteor.Error('not-authorized');
+    }
+    Posts.remove(postId);
+  },
 });
