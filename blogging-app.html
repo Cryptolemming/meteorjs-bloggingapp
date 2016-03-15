@@ -5,34 +5,40 @@
 <body>
   <div class='container'>
     <header>
-      <h1>Meteor Blogging Application</h1>
+      <h1 class='main-title'>Meteor Blogging Application</h1>
 
-      {{> loginButtons}}
-			
-			{{#if currentUser}}
-	      <h3>Create A New Post</h3>
+			<div class='login'>
+      	{{> loginButtons}}
+      </div>
+    </header>
+
+    <div class='posts-container'>
+
+	    {{#if currentUser}}
 	      <form class='new-post'>
+	      	<h3>Create A New Post</h3>
 	      	<input type='text' name='title' placeholder='Enter Title' />
-	      	<input type='text' name='description' placeholder='Enter Description' />
+	      	<input type='textarea' name='description' placeholder='Enter Description' />
 	      	<button type="submit">Create</button>
 	      </form>
-	    {{/if}}
-    </header>
- 
-    <ul>
-      {{#each posts}}
-        {{> post}}
-      {{/each}}
-    </ul>
+		  {{/if}}
+	 
+	    <ul class='posts-list'>
+	      {{#each posts}}
+	        {{> post}}
+	      {{/each}}
+	    </ul>
+
+	  </div>
   </div>
 </body>
  
 <template name='post'>
-  <li>
+  <li class='post-item'>
   	{{#if editing}}
   		<form class='edit-post'>
 	  		<input type='text' name='editTitle' value='{{title}}' />
-		    <input type='text' name='editDescription' value='{{description}}' />
+		    <input type='textarea' name='editDescription' value='{{description}}' />
 		    <button class='update-post' type="submit">Update</button>
 		    <button class='cancel'>Cancel</button>
 	    </form>
@@ -47,5 +53,6 @@
 	  	<button class='edit'>Edit</button>
 	  	<button class='delete'>Delete</button>
 	  {{/if}}
+	  <div class='divider'></div>
   </li>
 </template>

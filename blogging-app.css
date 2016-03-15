@@ -1,8 +1,118 @@
 /* CSS declarations go here */
+html, body {
+	margin: 0;
+	padding: 0;
+	background: #fbfbfb;
+	color: #212121;
+}
+
+.posts-container {
+	padding: 25px;
+	margin: 0 auto;
+	width: 800px;
+}
+
 ul {
   list-style-type: none;
+  margin: 0 auto;
+}
+
+h1 {
+	fontsize: 25px;
+	padding: 25px;
+	margin: 0;
+	
+}
+
+p {
+	fontSize: 20px;
+}
+
+button {
+	border: 0;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 15px;
+	color: #fbfbfb;
+	background: #536dfe;
+	cursor: pointer;
+	width: 100px;
+}
+
+button:hover {
+	background: rgba(83, 109, 254, .8);
+}
+
+input[type=text] {
+	display: block;
+	width: 300px;
+	padding: 5px;
+	margin: 15px auto;
+	outline: none;
+}
+
+input[type=textarea] {
+	display: block;
+	width: 300px;
+	height: 150px;
+	padding: 5px;
+	margin: 15px auto;
+	vertical-align: top;
+	outline: none;
+}
+
+.main-title {
+	color: #fbfbfb;
+	background: #d32f2f;
+	text-align: center;
+}
+
+.login {
+	margin: 25px;
+	float: right;
+}
+
+.new-post {
+	margin: 0 auto;
+	background: #212121;
+	color: #fbfbfb;
+	padding: 15px;
+	border-radius: 15px;
+	width: 600px;
+	text-align: center;
+	align-items: center;
+}
+
+.posts-list {
+	margin: 0 auto;
+	width: 600px;
+	align-items: center;
+}
+
+.post-item {
+	align-items: center;
 }
 
 .description {
   margin-left: 20px;
 }
+
+.divider {
+	margin: 35px auto;
+	padding: .5px;
+	background: #f44336;
+	width: 65%;
+}
+
+@media screen and (max-width: 1000px) {
+  h1 {
+    fontSize: 18px;
+  }
+  p {
+  	fontSize: 16px;
+  }
+  .posts-container {
+  	width: 95%;
+  }
+}
+
